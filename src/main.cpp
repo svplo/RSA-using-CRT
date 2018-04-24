@@ -18,9 +18,9 @@ void loop() {
     BigNumber c;
     BigNumber mm = BigNumber("2433");
 
-//    c = encrypt(m,e,n);
+   c = encrypt(m,e,n);
     // signing by decrypting message
-    mm = decrypt(m,d,n);
+  //  mm = decrypt(m,d,n);
 
     Serial.printf("%s\n", "encrypted message");
     Serial.printf("%s\n", c.toString());
