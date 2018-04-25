@@ -19,11 +19,37 @@ return (sum % n);
 }
 
  //too memory consuming above
-
 BigNumber jpl(BigNumber in, BigNumber p, BigNumber n) {
- //too memory consuming
-  return in.powMod(p,n);
+  BigNumber A = BigNumber("1");
+  std::vector<BigNumber> table;
+  BigNumber ONE = BigNumber("1");
+   table.push_back(ONE);
+  for (BigNumber i = BigNumber("1"); i <= log2(p) - 1; ++i){
+    table.push_back(table.at(i-BigNumber("1")) * in);
+  }
+
+  Serial.printf("%s\n", "log");
+  Serial.printf("%f\n", log2(p));
+  Serial.printf("%s\n", "back");
+  Serial.printf("%d\n",table.back().toString());
+/*
+  A = table.back();
+  for(BigNumber i = log2(p); i >= 0; --i){
+    A = A.powMod(2,n);
+    A = A * table.at(i) % n;
+  }
+  */
+  return A;
 }
+
+BigNumber crt(BigNumber p, BigNumber q, BigNumber n, BigNumber d, BigNumber c, BigNumber dp, BigNumber cp, BigNumber dq, BigNumber cq) {
+  BigNumber xp = BigNumber("5");
+  BigNumber xq = BigNumber("3");
+  BigNumber yp = xp.powMod(dp, p);
+  BigNumber yq = xq.powMod(dq, q);
+  return (q * cp * yp + p * cq * yq) % n;
+}
+
 
 BigNumber encrypt(BigNumber n, BigNumber e, BigNumber m) {
   BigNumber c = jpl(m,e,n);

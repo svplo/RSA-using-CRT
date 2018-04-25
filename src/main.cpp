@@ -6,6 +6,7 @@ void setup() {
 }
 
 void loop() {
+  /*
     BigNumber p = BigNumber("221102400398035299023528202047696432939");
     BigNumber q = BigNumber("313109253626953103148951688045552192811");
 
@@ -13,17 +14,31 @@ void loop() {
     BigNumber phin = BigNumber("69229207563756571188118786364132105616620410043425708197843204073541010775780");
     BigNumber e = BigNumber("3");
     BigNumber d = BigNumber("46152805042504380792079190909421403744413606695617138798562136049027340517187");
-    BigNumber m = BigNumber("1345");
+    BigNumber m = BigNumber("10");
 
     BigNumber c;
     BigNumber mm = BigNumber("2433");
 
    c = encrypt(m,e,n);
-    // signing by decrypting message
-  //  mm = decrypt(m,d,n);
+   */
+   BigNumber p = BigNumber("7");
+   BigNumber q = BigNumber("19");
+   BigNumber ONE = BigNumber("1");
+   BigNumber n = p * q;
+   BigNumber phin = (p-ONE) * (q -ONE);
+   BigNumber e = BigNumber("5");
+   BigNumber d = BigNumber("65");
+   BigNumber m = BigNumber("117");
+   BigNumber dp = BigNumber("5");
+   BigNumber dq = BigNumber("11");
+   BigNumber cp = BigNumber("3");
+   BigNumber cq = BigNumber("11");
 
-    Serial.printf("%s\n", "encrypted message");
-    Serial.printf("%s\n", c.toString());
+    // signing by decrypting message
+    BigNumber mm = crt(p, q, n,d,m, dp, cp, dq, cq);
+
+    Serial.printf("%s\n", "decrypted message");
+    Serial.printf("%s\n", mm.toString());
 //    Serial.printf("%s\n", "decrypted message");
 //    Serial.printf("%s\n", mm.toString());
 
