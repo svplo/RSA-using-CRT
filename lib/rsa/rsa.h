@@ -43,8 +43,8 @@ BigNumber jpl(BigNumber in, BigNumber p, BigNumber n) {
 }
 
 BigNumber crt(BigNumber p, BigNumber q, BigNumber n, BigNumber d, BigNumber c, BigNumber dp, BigNumber cp, BigNumber dq, BigNumber cq) {
-  BigNumber xp = BigNumber("5");
-  BigNumber xq = BigNumber("3");
+  BigNumber xp = c % p;
+  BigNumber xq = c % q;
   BigNumber yp = xp.powMod(dp, p);
   BigNumber yq = xq.powMod(dq, q);
   return (q * cp * yp + p * cq * yq) % n;
